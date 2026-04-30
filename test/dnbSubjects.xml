@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<marc:collection xmlns:marc="http://www.loc.gov/MARC21/slim" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.loc.gov/MARC21/slim http://www.loc.gov/standards/marcxml/schema/MARC21slim.xsd">
+	<marc:record>
+		<marc:controlfield tag="001">1342994639</marc:controlfield>
+		<marc:datafield tag="689" ind1="0" ind2="0">
+			<marc:subfield code="0">(DE-588)4121342-7</marc:subfield>
+			<marc:subfield code="0">https://d-nb.info/gnd/4121342-7</marc:subfield>
+			<marc:subfield code="0">(DE-101)041213424</marc:subfield>
+			<marc:subfield code="D">s</marc:subfield>
+			<marc:subfield code="a">Gemüsegarten</marc:subfield>
+		</marc:datafield>
+		<marc:datafield tag="689" ind1="0" ind2="1">
+			<marc:subfield code="0">(DE-588)4164199-1</marc:subfield>
+			<marc:subfield code="0">https://d-nb.info/gnd/4164199-1</marc:subfield>
+			<marc:subfield code="0">(DE-101)04164199X</marc:subfield>
+			<marc:subfield code="D">s</marc:subfield>
+			<marc:subfield code="a">Klimaänderung</marc:subfield>
+		</marc:datafield>
+		<marc:datafield tag="689" ind1="0" ind2=" ">
+			<marc:subfield code="5">DE-101</marc:subfield>
+			<marc:subfield code="5">DE-101</marc:subfield>
+		</marc:datafield>
+	</marc:record>
+
+	<marc:record>
+		<marc:controlfield tag="001">1346814910</marc:controlfield>
+		<marc:datafield tag="689" ind1="0" ind2="0">
+			<marc:subfield code="0">(DE-588)4120450-5</marc:subfield>
+			<marc:subfield code="0">https://d-nb.info/gnd/4120450-5</marc:subfield>
+			<marc:subfield code="0">(DE-101)041204506</marc:subfield>
+			<marc:subfield code="D">s</marc:subfield>
+			<marc:subfield code="a">Hochbeet</marc:subfield>
+		</marc:datafield>
+		<marc:datafield tag="689" ind1="0" ind2=" ">
+			<marc:subfield code="5">DE-101</marc:subfield>
+			<marc:subfield code="5">DE-101</marc:subfield>
+		</marc:datafield>
+	</marc:record>
+
+</marc:collection>

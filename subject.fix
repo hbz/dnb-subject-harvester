@@ -1,0 +1,8 @@
+# Skip records without 689
+
+unless exists("689??")
+    reject()
+end
+
+# Only keep 001 and 689
+retain("001","689??")
