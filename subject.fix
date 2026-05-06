@@ -4,5 +4,22 @@ unless exists("689??")
     reject()
 end
 
+# do list(path:"689??","var":"$i")
+#    add_field("counter.$append","1")
+#     copy_field("counter","$i.8")
+#     if is_array("$i.8")
+#         count("counter")
+#     else
+#         add_field("$i.8","1")
+#     end
+#     append("$i.8","\\p")
+#     copy_field("$i.8","883")
+# end
+
+copy_field("001","@dnbId")
+prepend("@dnbId","(DE-101)")
+copy_field("@dnbId","035  .$append.a")
+
+
 # Only keep 001 and 689
-retain("001","689??")
+retain("001","689??","035??")
