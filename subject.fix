@@ -1,3 +1,7 @@
+do once("maps")
+  put_filemap("$[version]almaMmsId2dnbId.tsv", "dnbId2AlmaMmsId", sep_char:"\t", key_column:"1", value_column:"0", expected_columns:"-1")
+end
+
 # Skip records without 689
 
 unless exists("689??")
@@ -18,8 +22,15 @@ end
 
 copy_field("001","@dnbId")
 prepend("@dnbId","(DE-101)")
-copy_field("@dnbId","035  .$append.a")
+if is_array("035  ")
+    copy_field("@dnbId","035  .$append.a")
+else
+    move_field("035  ","@035  ")
+    copy_field("@035  ","035  .$append")
+    copy_field("@dnbId","035  .$append.a")
+end
 
+lookup("001","dnbId2AlmaMmsId")
 
 # Only keep 001 and 689
 retain("001","689??","035??")
