@@ -1,7 +1,7 @@
-default sruHarvest="prod/sru_records.xml";
+default sruHarvest=FLUX_DIR + "prod/sru_records.xml";
 default outfile=FLUX_DIR + "prod/dnbSubjects.xml.gz";
-default lobidHarvest = "test/dnbSubjects.jsonl";
-default version="prod/";
+default lobidHarvest = FLUX_DIR + "prod/dnbSubjects.jsonl";
+default version=FLUX_DIR + "prod/";
 
 
 "Start harvesting lobid."
@@ -58,4 +58,19 @@ sruHarvest
 | encode-marcxml
 | object-batch-log 
 | write(outfile, compression="gzip") // compression is better for big file
+;
+
+"Create a list of broken dnbIds."
+| print;
+
+sruHarvest
+| open-file
+| as-lines
+| filter-strings("<records/>",passmatches="true")
+| match(pattern=".*dnb.idn=(.+)</query>.+$",replacement="$1")
+| decode-csv(separator="\t")
+| fix(FLUX_DIR + "failed.fix",*)
+| batch-log(batchSize="10")
+| encode-csv(separator="\t",includeheader="true",noQuotes="true")
+| write(FLUX_DIR + "prod/failed.tsv")
 ;

@@ -1,0 +1,7 @@
+do once("maps")
+  put_filemap("$[version]almaMmsId2dnbId.tsv", "dnbId2AlmaMmsId", sep_char:"\t", key_column:"1", value_column:"0", expected_columns:"-1")
+end
+
+copy_field("0","almaMmsId")
+move_field("0","dnbId")
+lookup("almaMmsId","dnbId2AlmaMmsId")
