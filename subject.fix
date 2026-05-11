@@ -34,6 +34,7 @@ lookup("001","dnbId2AlmaMmsId")
 
 do list(path:"689??","var":"$i")
     replace_all("$i.0.*","^(?!\\(DE-588\\)).*$","")
+    uniq("$i.5")
 end
 
 # Only keep 001 and 689

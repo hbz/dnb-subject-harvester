@@ -23,7 +23,6 @@
 		</marc:datafield>
 		<marc:datafield tag="689" ind1="0" ind2=" ">
 			<marc:subfield code="5">DE-101</marc:subfield>
-			<marc:subfield code="5">DE-101</marc:subfield>
 		</marc:datafield>
 	</marc:record>
 
@@ -44,7 +43,6 @@
 			<marc:subfield code="a">Hochbeet</marc:subfield>
 		</marc:datafield>
 		<marc:datafield tag="689" ind1="0" ind2=" ">
-			<marc:subfield code="5">DE-101</marc:subfield>
 			<marc:subfield code="5">DE-101</marc:subfield>
 		</marc:datafield>
 	</marc:record>
