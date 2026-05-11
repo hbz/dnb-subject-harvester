@@ -1,17 +1,18 @@
 default sruHarvest=FLUX_DIR + "test/sru_records.xml";
-default outfile=FLUX_DIR + "test/dnbSubjects.xml.gz";
+default outfile=FLUX_DIR + "test/dnbSubjects.xml";
 default lobidHarvest = FLUX_DIR + "test/dnbSubjects.jsonl";
 default version=FLUX_DIR + "test/";
 
+// Outcomment to not harvest the data every time.
 
-"Start harvesting lobid."
-| print;
-
-"https://lobid.org/resources/search?q=_exists_%3AdnbId+AND+NOT+subject.type%3A%22ComplexSubject%22+AND+inCollection.id%3A%22http%3A%2F%2Flobid.org%2Forganisations%2FDE-655%23%21%22+AND+NOT+_exists_%3AzdbId+AND+Gem%C3%BCse"
-| open-http(header="User-Agent: hbz/dnb-subject-harvester", accept="application/x-jsonlines")
-| as-lines
-| write(lobidHarvest)
-;
+// "Start harvesting lobid."
+// | print;
+// 
+// "https://lobid.org/resources/search?q=_exists_%3AdnbId+AND+NOT+subject.type%3A%22ComplexSubject%22+AND+inCollection.id%3A%22http%3A%2F%2Flobid.org%2Forganisations%2FDE-655%23%21%22+AND+NOT+_exists_%3AzdbId+AND+Gem%C3%BCse"
+// | open-http(header="User-Agent: hbz/dnb-subject-harvester", accept="application/x-jsonlines")
+// | as-lines
+// | write(lobidHarvest)
+// ;
 
 "Harvesting lobid finished. Start creating dnbId2zdbId map."
 | print;
@@ -22,7 +23,7 @@ lobidHarvest
 | decode-json
 | fix("retain('almaMmsId','dnbId')")
 | encode-csv(noQuotes="true", separator="\t")
-| write("test/almaMmsId2dnbId.tsv")
+| write(FLUX_DIR + "test/almaMmsId2dnbId.tsv")
 ;
 
 "Map finished. Start harvesting sru."
@@ -53,20 +54,20 @@ sruHarvest
 | fix(FLUX_DIR + "subject.fix",*)
 | batch-log(batchSize="10")
 | encode-marcxml
-| write(FLUX_DIR + "test/dnbSubjects.xml")
+| write(outfile)
 ;
 
 "Create a list of broken dnbIds."
 | print;
 
-sruHarvest
-| open-file
-| as-lines
-| filter-strings("<records/>",passmatches="true")
-| match(pattern=".*dnb.idn=(.+)</query>.+$",replacement="$1")
-| decode-csv(separator="\t")
-| fix(FLUX_DIR + "failed.fix",*)
-| batch-log(batchSize="10")
-| encode-csv(separator="\t",includeheader="true",noQuotes="true")
-| write(FLUX_DIR + "test/failed.tsv")
-;
+//sruHarvest
+//| open-file
+//| as-lines
+//| filter-strings("<records/>",passmatches="true")
+//| match(pattern=".*dnb.idn=(.+)</query>.+$",replacement="$1")
+//| decode-csv(separator="\t")
+//| fix(FLUX_DIR + "failed.fix",*)
+//| batch-log(batchSize="10")
+//| encode-csv(separator="\t",includeheader="true",noQuotes="true")
+//| write(FLUX_DIR + "test/failed.tsv")
+//;
