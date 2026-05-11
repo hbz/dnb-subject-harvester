@@ -13,15 +13,11 @@
 		</marc:datafield>
 		<marc:datafield tag="689" ind1="0" ind2="0">
 			<marc:subfield code="0">(DE-588)4121342-7</marc:subfield>
-			<marc:subfield code="0">https://d-nb.info/gnd/4121342-7</marc:subfield>
-			<marc:subfield code="0">(DE-101)041213424</marc:subfield>
 			<marc:subfield code="D">s</marc:subfield>
 			<marc:subfield code="a">Gemüsegarten</marc:subfield>
 		</marc:datafield>
 		<marc:datafield tag="689" ind1="0" ind2="1">
 			<marc:subfield code="0">(DE-588)4164199-1</marc:subfield>
-			<marc:subfield code="0">https://d-nb.info/gnd/4164199-1</marc:subfield>
-			<marc:subfield code="0">(DE-101)04164199X</marc:subfield>
 			<marc:subfield code="D">s</marc:subfield>
 			<marc:subfield code="a">Klimaänderung</marc:subfield>
 		</marc:datafield>
@@ -44,8 +40,6 @@
 		</marc:datafield>
 		<marc:datafield tag="689" ind1="0" ind2="0">
 			<marc:subfield code="0">(DE-588)4120450-5</marc:subfield>
-			<marc:subfield code="0">https://d-nb.info/gnd/4120450-5</marc:subfield>
-			<marc:subfield code="0">(DE-101)041204506</marc:subfield>
 			<marc:subfield code="D">s</marc:subfield>
 			<marc:subfield code="a">Hochbeet</marc:subfield>
 		</marc:datafield>
