@@ -1,7 +1,8 @@
-default sruHarvest=FLUX_DIR + "prod/sru_records.xml";
-default outfile=FLUX_DIR + "prod/dnbSubjects.xml.gz";
-default lobidHarvest = FLUX_DIR + "prod/dnbSubjects.jsonl";
-default version=FLUX_DIR + "prod/";
+default version="prod/";
+default sruHarvest=FLUX_DIR + version +"sru_records.xml";
+default outfile=FLUX_DIR + version + "dnbSubjects.xml";
+default lobidHarvest = FLUX_DIR + version + "dnbSubjects.jsonl";
+default lookupFile = FLUX_DIR + version + "almaMmsId2dnbId.tsv";
 
 
 "Start harvesting lobid."
@@ -16,13 +17,13 @@ default version=FLUX_DIR + "prod/";
 "Harvesting lobid finished. Start creating dnbId2zdbId map."
 | print;
 
-FLUX_DIR + "prod/dnbSubjects.jsonl"
+lobidHarvest
 | open-file
 | as-lines
 | decode-json
 | fix("retain('almaMmsId','dnbId')")
 | encode-csv(noQuotes="true", separator="\t")
-| write("prod/almaMmsId2dnbId.tsv")
+| write(lookupFile)
 ;
 
 "Map finished. Start harvesting sru."

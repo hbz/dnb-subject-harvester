@@ -1,7 +1,8 @@
-default sruHarvest=FLUX_DIR + "test/sru_records.xml";
-default outfile=FLUX_DIR + "test/dnbSubjects.xml";
-default lobidHarvest = FLUX_DIR + "test/dnbSubjects.jsonl";
-default version=FLUX_DIR + "test/";
+default version="test/";
+default sruHarvest=FLUX_DIR + version +"sru_records.xml";
+default outfile=FLUX_DIR + version + "dnbSubjects.xml";
+default lobidHarvest = FLUX_DIR + version + "dnbSubjects.jsonl";
+default lookupFile = FLUX_DIR + version + "almaMmsId2dnbId.tsv";
 
 // Outcomment to not harvest the data every time.
 
@@ -23,13 +24,13 @@ lobidHarvest
 | decode-json
 | fix("retain('almaMmsId','dnbId')")
 | encode-csv(noQuotes="true", separator="\t")
-| write(FLUX_DIR + "test/almaMmsId2dnbId.tsv")
+| write(lookupFile)
 ;
 
 "Map finished. Start harvesting sru."
 | print;
 
-FLUX_DIR + "test/dnbSubjects.jsonl"
+lobidHarvest
 | open-file
 | as-lines
 | decode-json
