@@ -30,20 +30,20 @@ lobidHarvest
 "Map finished. Start harvesting sru."
 | print;
 
-lobidHarvest
-| open-file
-| as-lines
-| decode-json
-| fix("retain('dnbId')")
-| literal-to-object
-| template("https://services.dnb.de/sru/dnb?version=1.1&operation=searchRetrieve&query=dnb.idn=${o}&recordSchema=MARC21-xml")
-| open-http(header="User-Agent: hbz/dnbSubjectHarvester", accept="application/xml")
-| as-records
-// The following two steps create a single xml file from the multiple incoming sru requests, saved into a harvest tag
-| match(pattern="<\\?xml version=.*?>", replacement="")
-| object-batch-log(batchSize="100")
-| write(sruHarvest, header="<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<harvest>", footer="</harvest>")
-;
+//lobidHarvest
+//| open-file
+//| as-lines
+//| decode-json
+//| fix("retain('dnbId')")
+//| literal-to-object
+//| template("https://services.dnb.de/sru/dnb?version=1.1&operation=searchRetrieve&query=dnb.idn=${o}&recordSchema=MARC21-xml")
+//| open-http(header="User-Agent: hbz/dnbSubjectHarvester", accept="application/xml")
+//| as-records
+//// The following two steps create a single xml file from the multiple incoming sru requests, saved into a harvest tag
+//| match(pattern="<\\?xml version=.*?>", replacement="")
+//| object-batch-log(batchSize="100")
+//| write(sruHarvest, header="<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<harvest>", footer="</harvest>")
+//;
 
 "SRU Harvest finished. Start harvesting dnb subject data."
 | print;

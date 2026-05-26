@@ -1,7 +1,7 @@
 default version="prod/";
-default sruHarvest=FLUX_DIR + version +"sru_records.xml";
-default outfile=FLUX_DIR + version + "dnbSubjects.xml";
-default lobidHarvest = FLUX_DIR + version + "dnbSubjects.jsonl";
+default sruHarvest=FLUX_DIR + version +"sru_records.xml.gz";
+default outfile=FLUX_DIR + version + "dnbSubjects.xml.gz";
+default lobidHarvest = FLUX_DIR + version + "dnbSubjects.jsonl.gz";
 default lookupFile = FLUX_DIR + version + "almaMmsId2dnbId.tsv";
 
 
@@ -9,9 +9,9 @@ default lookupFile = FLUX_DIR + version + "almaMmsId2dnbId.tsv";
 | print;
 
 "https://lobid.org/resources/search?q=_exists_%3AdnbId+AND+NOT+subject.type%3A%22ComplexSubject%22+AND+inCollection.id%3A%22http%3A%2F%2Flobid.org%2Forganisations%2FDE-655%23%21%22+AND+NOT+_exists_%3AzdbId&format=jsonl"
-| open-http(header="User-Agent: hbz/dnb-subject-harvester")
+| open-http(header="User-Agent: hbz/dnb-subject-harvester\\nAccept-Encoding: gzip" )
 | as-lines
-| write(lobidHarvest)
+| write(lobidHarvest, compression="gzip")
 ;
 
 "Harvesting lobid finished. Start creating dnbId2zdbId map."
@@ -42,7 +42,7 @@ lobidHarvest
 // The following two steps create a single xml file from the multiple incoming sru requests, saved into a harvest tag
 | match(pattern="<\\?xml version=.*?>", replacement="")
 | object-batch-log(batchSize="100")
-| write(sruHarvest, header="<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<harvest>", footer="</harvest>")
+| write(sruHarvest, header="<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<harvest>", footer="</harvest>", compression="gzip")
 ;
 
 
